@@ -123,8 +123,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void handleDigitClick(int digit) {
-        if (newInput) {
+    public String getCurrentText() {
+        return currentText;
+    }
+
+    public void handleDigitClick(int digit) {
+        if (newInput || currentText.equals("Error")) {
             currentText = String.valueOf(digit);
             newInput = false;
         } else {
@@ -133,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
         display.setText(currentText);
     }
 
-    private void handleOperatorClick(String newOperator) {
-        if (!currentText.isEmpty()) {
+    public void handleOperatorClick(String newOperator) {
+        if (!currentText.isEmpty() && !operator.isEmpty()) {
             calculateResult();
             operand1 = Double.parseDouble(currentText);
             operator = newOperator;
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void calculateResult() {
+    public void calculateResult() {
         if (!currentText.isEmpty() && !operator.isEmpty()) {
             double result = 0.0;
             double operand2 = Double.parseDouble(currentText);
